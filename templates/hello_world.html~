@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>team 15 website project</title>
+  <link rel=stylesheet type=text/css href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+</head>
+<p>Welcome to  National Cheng Kung Univeristy</p>
+<p><a href="http://frozen-plains-3583.herokuapp.com/">Mobile please click it</a></p>
+
+<button onclick="getLocation()">locate your position</button>
+
+<button onclick="callhello2()">Upload</button>
+<input type="text" id="item">
+<p id="demo"></p>
+
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;
+var map = L.map('map').setView([lat, lon], 13);
+
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmV0dGxlMTIzIiwiYSI6ImNpZ2pleWwxdzAwMzN1MWtyN2oyODJqOTYifQ.nBVqe8jEx3cj9A3zEQfFKw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'bettle123.o2niii11'
+		}).addTo(map);
+var marker = L.marker([lat, lon]).addTo(map);
+var circle = L.circle([lat, lon], 600, {
+    color: 'green',
+    fillColor: 'purple',
+    fillOpacity: 0.3
+}).addTo(map);
+var circle = L.circle([lat, lon], 650, {
+    color: 'green',
+    fillColor: 'purple',
+    fillOpacity: 0.3
+}).addTo(map);
+var polygon = L.polygon([
+    [lat, lon+0.0057735],
+    [lat-0.005, lon-0.00288675],
+    [lat+0.005, lon-0.00288675]
+]).addTo(map);
+var polygon = L.polygon([
+    [lat, lon-0.0057735],
+    [lat+0.005, lon+0.00288675],
+    [lat-0.005, lon+0.00288675]
+]).addTo(map);
+
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+
+}
+</script>
+
+<script>
+
+
+//save data
+function callhello2() {
+    var item = $("#item").val();
+
+    $.ajax({
+        type: 'POST',
+        url: '/hello2/',
+        data: {"item": item, "lat": lat, "lon":lon},
+    })
+    .done(function() {
+        alert("Success");
+    })
+}
+</script>
+
+
+
+<p id="time"></p>
+
+<script>
+document.getElementById("time").innerHTML = Date();
+</script>
+
+
+
+<body>
+  <div id="map" style="height:600px; width:1000px;"></div>
+    <p>This is our teamwork.</p>
+
+<script>
+
+	var map = L.map('map').setView([lat, lon], 13);
+
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmV0dGxlMTIzIiwiYSI6ImNpZ2pleWwxdzAwMzN1MWtyN2oyODJqOTYifQ.nBVqe8jEx3cj9A3zEQfFKw', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'bettle123.o2niii11'
+		}).addTo(map);
+var marker = L.marker([lat, lon]).addTo(map);
+var circle = L.circle([lat, lon], 600, {
+    color: 'green',
+    fillColor: 'purple',
+    fillOpacity: 0.3
+}).addTo(map);
+var circle = L.circle([lat, lon], 650, {
+    color: 'green',
+    fillColor: 'purple',
+    fillOpacity: 0.3
+}).addTo(map);
+var polygon = L.polygon([
+    [lat, lon+0.0057735],
+    [lat-0.005, lon-0.00288675],
+    [lat+0.005, lon-0.00288675]
+]).addTo(map);
+var polygon = L.polygon([
+    [lat, lon-0.0057735],
+    [lat+0.005, lon+0.00288675],
+    [lat-0.005, lon+0.00288675]
+]).addTo(map);
+
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+</script>
+</body>
+
+</html>

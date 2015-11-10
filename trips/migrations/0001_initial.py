@@ -11,6 +11,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='GisPoint',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('lat', models.CharField(max_length=20)),
+                ('lon', models.CharField(max_length=20)),
+                ('item', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Post',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
