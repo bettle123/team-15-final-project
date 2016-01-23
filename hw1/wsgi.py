@@ -8,12 +8,14 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
 
-## mysite/wsgi.py
+# mysite/mysite/wsgi.py
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hw1.settings")
 
 from django.core.wsgi import get_wsgi_application
 
 from dj_static import Cling
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hw1.settings")
+
 application = Cling(get_wsgi_application())

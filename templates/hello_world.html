@@ -1,24 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>team 15 website project</title>
+  <title>team 15 final project</title>
   <link rel=stylesheet type=text/css href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+<style> 
+body {
+    background: url("https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpl1/t31.0-8/12605535_813392108806874_1023914622705645200_o.jpg");
+    background-size: 100% 25%;
+    background-repeat: no-repeat;
+    padding-top: 40px;
+}
+</style>
+
+
 </head>
-<p>Welcome to  National Cheng Kung Univeristy</p>
-<p><a href="http://frozen-plains-3583.herokuapp.com/">Mobile please click it</a></p>
+		<a href="http://team15-finalproject.herokuapp.com/"><img src="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpf1/v/t1.0-9/12592418_1055742491113332_3483127482321343305_n.jpg?oh=8269fb235f3562e4eb5d648abe0d8d5a&oe=5738DD5F" style="width:10%;height:15%;border-radius:10px; border:5px;" ></a>
+	  
+		<button onclick="myFunction()" type="button" style="width:10%;height:15%;border-radius:50%;background-color:white;position:absolute;top:10%;left:25%">
+			<img src="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/12573969_813398358806249_2987381118437452536_n.jpg?oh=e80c9ee9213b8ded7349434f2b9f6586&oe=5747B8EC" style="width:100%;height:100%;border-radius:50%" ></button>
+	<font size="6"><span style="color:blue;background-color:black;"><p id="demo2"></p></font>
+        <script>
+        function myFunction() {
+        document.getElementById("demo2").innerHTML = "我們的目標是提供一個平台，讓大家對不同地區各類食物店家快速了解。";
+       }
+       </script>	
+		
 
-<button onclick="getLocation()">locate your position</button>
+		
+	<button onclick="myFunction2()" type="button" style="width:10%;height:15%;border-radius:50%;background-color:white;position:absolute;top:12%;left:45%">
+			<img src="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/1132_813375402141878_7322149141038121778_n.jpg?oh=9d9eab9528623b28830ac84153a3df96&oe=56FE9871" style="width:100%;height:100%;border-radius:50%" ></button>
+	<font size="6"><span style="color:green;background-color:black;"><p id="demo3"></p></font>
+        <script>
+        function myFunction2() {
+        document.getElementById("demo3").innerHTML = "麵包＆蛋糕 早餐 正餐 宵夜 其他 </br><img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xat1/v/t1.0-9/12509224_813424375470314_5029646505268197467_n.jpg?oh=a9da843884c1834a7091b72dca0d6898&oe=5730EAAB style=width:10%;height:10%;border-radius:10% >";
+       }
+       </script>	
+	
+			<img src="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/12541017_1054854674535447_4351673516124840715_n.jpg?oh=9a5c22c45cb685ab9790cc3b9bcfb732&oe=5748CEBB" style="width:10%;height:80%;">
+<h2><button onclick="getLocation()" style="width:80%;height:15%;border-radius:10px; background-color:white;color:black;">
+<img src="https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/12549071_813442168801868_5833077961644003785_n.jpg?oh=7c65ef0ab714f7a2ccc28021408d0049&oe=5745C875" style="width:10%;height:80%;">
+	<font size="15"  face="標楷體">按下此鍵，馬上定位自己，順便找自己附近的美食！</font>
+</button></h2>
 
-<button onclick="callhello2()">Upload</button>
-<input type="text" id="item">
-<p id="demo"></p>
+
 
 <script>
 var x = document.getElementById("demo");
-var lat = 22.98133;
-var lon = 120.2224227;
+var lat =22.981838;
+var lon =120.225323;
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -27,81 +58,212 @@ function getLocation() {
     }
 }
 
+
+	
+	
 function showPosition(position) {
     var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
-    map.removeLayer(marker);
+    var lon = position.coords.longitude;	
+    var circle1 = L.circle([lat, lon], 600, {
+    color: 'green',
+    fillColor: 'transparent',
+    fillOpacity: 0.3
+    }).addTo(map);
+    var circle2 = L.circle([lat, lon], 650, {
+    color: 'green',
+    fillColor: 'transparent',
+    fillOpacity: 0.3
+    }).addTo(map);
+    var polygon1 = L.polygon([
+    [lat, lon+0.0057735],
+    [lat-0.005, lon-0.00288675],
+    [lat+0.005, lon-0.00288675]
+    ]).addTo(map);
+    var polygon2 = L.polygon([
+    [lat, lon-0.0057735],
+    [lat+0.005, lon+0.00288675],
+    [lat-0.005, lon+0.00288675]
+    ]).addTo(map);
     marker = L.marker([lat, lon]).addTo(map);
+    L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("<b>Hello everyone!</b><br /> Here is your position.").openPopup();
     x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;	
-    
+    "<br>Longitude: " + position.coords.longitude;
+	
 }
 
-
+</script>
+<script>
 //save data
 function callhello2() {
-    var item = $("#item").val();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(callhello3);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
 
+function callhello3(position) {
+    var item = $("#item").val();
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
     $.ajax({
         type: 'POST',
         url: '/hello2/',
         data: {"item": item, "lat": lat, "lon":lon},
     })
     .done(function() {
-        alert("Success");
+        alert("謝謝你提供的寶貴意見");
     })
 }
 
 </script>
 
 
-<p id="time"></p>
-
-<script>
-document.getElementById("time").innerHTML = Date();
-</script>
-
 
 
 <body>
-  <div id="map" style="height:600px; width:1000px;"></div>
-    <p>This is our teamwork.</p>
-
+	<div class="btn-group">
+        <button type="button" id="allbus"  style="width:10%;height:15%;border-radius:10px; background-color:blue;color:white;"><font size="5">所有食物</br>(All)</font></button>
+		<button type="button" id="bread"  style="width:15%;height:15%; border-radius:10px;background-color:green;color:white"><font size="5">麵包＆蛋糕</br>(Bread＆Cake)</font></button>
+		<button type="button" id="breakfast"  style="width:10%;height:15%; border-radius:10px;background-color:red;color:white"><font size="5">早餐店</br>(Breakfast)</font></button>
+		<button type="button" id="meal"  style="width:10%;height:15%; border-radius:10px;background-color:yellow;color:black"><font size="5">正餐</br>(Meal)</font></button>
+		<button type="button" id="overnight"  style="width:20%;height:15%; border-radius:10px;background-color:red;color:black"><font size="5"><b>宵夜</br>(Midnight Snack)</font></button>
+		<button type="button" id="others" style="width:10%;height:15%; border-radius:10px;background-color:purple;color:white"><font size="5">其他</br>(Others)</font></button>
+    </div>
+  <div id="map" style="height:300px; width:80%"></div>    
 <script>
+//bread
+var bread = new L.LayerGroup();
+var greenIcon1 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1237014_157556487774107_116713971_n.jpg?oh=add1fb1ad3098836396e35fc1ade5d4b&oe=57013031',
+    iconSize:     [80, 60], // size of the icon
+    iconAnchor:   [80, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+L.marker([22.995946, 120.220928], {icon: greenIcon1}).bindPopup("<b>店名：<a href=https://www.facebook.com/ivycoffee.bakery>常春藤點心坊</a></br>地址：701 台南市台南市東區大學路20號之1號</br>電話：06-3359966<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1237014_157556487774107_116713971_n.jpg?oh=add1fb1ad3098836396e35fc1ade5d4b&oe=57013031 style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
 
-	var map = L.map('map').setView([lat, lon], 13);
+var greenIcon2 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/1240154_156144531248636_1105400991_n.jpg?oh=fe0302ecd9f39e223a99645c43dbee89&oe=56FCD12D',
+    iconSize:     [80, 60], // size of the icon
+    iconAnchor:   [80, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+})
+L.marker([22.981838, 120.225323], {icon: greenIcon2}).bindPopup("<b>店名：<a href=https://www.facebook.com/ivycoffee.bakery>常春藤點心坊</a></br>地址：701 台南市台南市東區崇學路186號</br>電話：06-3359966<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/1240154_156144531248636_1105400991_n.jpg?oh=fe0302ecd9f39e223a99645c43dbee89&oe=56FCD12D style=width:304px;height:228px;border-radius:10px;>" ).addTo(bread);	
 
-		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmV0dGxlMTIzIiwiYSI6ImNpZ2pleWwxdzAwMzN1MWtyN2oyODJqOTYifQ.nBVqe8jEx3cj9A3zEQfFKw', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+var greenIcon3 = L.icon({
+    iconUrl: 'http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg',
+    iconSize:     [80, 60], // size of the icon
+    iconAnchor:   [80, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+	
+L.marker([22.971444,120.176309], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-中央工廠</a></br>地址：台南市南區安平工業區新樂路56-1號</br>電話：06-2923511<img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>" ).addTo(bread);		
+L.marker([22.992202, 120.221410], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-總店</a></br>地址：台南市東區東寧路51號1樓</br>電話：06-2371467 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([22.989088,120.230421], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-東寧二店</a></br>地址：台南市東寧路500號1樓</br>電話：06-2740011 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([22.988829,120.204423], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-孔 廟 店</a></br>地址：台南市中西區南門路4號1樓</br>電話：06-2131235 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([23.021418,120.192378], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-安 南 店</a></br>地址：台南市安南區海佃路一段52號1樓</br>電話：06-2803775 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);	
+L.marker([22.997515,120.169885], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-安 平 店</a></br>地址：台南市安平區慶平路569號1樓</br>電話：06-2952785 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([23.161121,120.174608], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-佳 里 店</a></br>地址：台南市佳里區光復路239號1樓</br>電話：06-7233131 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([22.967522,120.287967], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-歸 仁 店</a></br>地址：台南市歸仁區中山路二段255號1樓</br>電話：06-2305787 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);	
+L.marker([22.686304,120.290718], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-左營店</a></br>地址：高雄市左營區左營大路265號1樓</br>電話：07-5823566 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+L.marker([22.791918,120.297389], {icon: greenIcon3}).bindPopup("<b>店名：<a href=http://www.minsin.com.tw/>明新食品-岡山店</a></br>地址：高雄市岡山區民有路59號1樓</br>電話：07-6211058 <img src=http://www.minsin.com.tw/upload/big/f0df95df7a557d84.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(bread);
+	
+//breakfast
+var breakfast = new L.LayerGroup();
+var food1 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/531758_428654913893481_83053054_n.jpg?oh=d3990dfc76540062c97487b0469d96bb&oe=574053B9',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([22.981564,120.199827], {icon: food1}).bindPopup("<b>店名：<a href=https://www.facebook.com/%E5%90%90%E5%8F%B8%E5%90%90%E5%8F%B8%E6%97%A9%E9%A4%90%E5%B0%88%E8%B3%A3%E5%BA%97-134018606690448/?fref=ts>吐司吐司早餐專賣店</a></br>地址：700 台南市中西區健康路一段348號</br>電話：06-2136721<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/531758_428654913893481_83053054_n.jpg?oh=d3990dfc76540062c97487b0469d96bb&oe=574053B9 style=width:304px;height:228px;border-radius:10px;>").addTo(breakfast);
+
+var food2 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpt1/v/t35.0-12/12011597_906243639411148_946638558_o.jpg?oh=7975fad73116bd85d106ebe7fff061b4&oe=56A53D0D',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([22.994997,120.217812], {icon: food2}).bindPopup("<b>店名：<a href=https://www.facebook.com/pages/%E8%80%81%E4%B8%98%E6%97%A9%E9%A4%90/268627009843483>老丘早餐</a></br>地址：台南市東區勝利路135號</br>電話：0920 268 523<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpt1/v/t35.0-12/12011597_906243639411148_946638558_o.jpg?oh=7975fad73116bd85d106ebe7fff061b4&oe=56A53D0D style=width:304px;height:228px;border-radius:10px;>").addTo(breakfast);
+	
+	
+// meal
+var meal = new L.LayerGroup();
+var meal1 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xft1/t31.0-8/12622526_1055912377763010_4304490367099422386_o.jpg',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([23.005932,120.221824], {icon: meal1}).bindPopup("<b>店名：張記涼麵</br>地址：台南市長榮路4段137號</br>電話：06-2002589</br>特色：鮮蝦餛飩麵 $60<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xft1/t31.0-8/12622526_1055912377763010_4304490367099422386_o.jpg style=width:304px;height:228px;border-radius:50%;>").addTo(meal);
+
+	
+var meal2 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xtp1/t31.0-8/12604650_1055912431096338_2600558745493535782_o.jpg',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([22.994527,120.226612], {icon: meal2}).bindPopup("<b>店名：開心園美食</br>地址：台南市東區東安路165號</br>電話：06-2089822</br>必點：蔥抓餅 $25<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xtp1/t31.0-8/12604650_1055912431096338_2600558745493535782_o.jpg style=width:304px;height:228px;border-radius:50%;>").addTo(meal);
+	
+var meal3 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xtp1/t31.0-8/12615526_1055912427763005_3907445052732043512_o.jpg',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([22.995282,120.214626], {icon: meal3}).bindPopup("<b>店名：元味屋和風洋食</br>地址：台南市東區育樂街160號</br>電話：06-2368830</br>招牌：日式燒肉蓋飯 $120<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xtp1/t31.0-8/12615526_1055912427763005_3907445052732043512_o.jpg style=width:304px;height:228px;border-radius:50%;>").addTo(meal);
+		
+	
+	
+// overnight	
+var overnight = new L.LayerGroup();
+var overfood1 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-ash2/v/t1.0-9/1044625_436046696502144_1338469741_n.jpg?oh=6c2ed341918c980aa734f059b03b461d&oe=57430281',
+    iconSize:     [60, 80], // size of the icon
+});
+L.marker([22.998857,120.195917], {icon: overfood1}).bindPopup("<b>店名：<a href=https://www.facebook.com/%E5%A7%8A%E5%A6%B9%E8%B1%86%E6%BC%BF-282890925151056/?fref=ts>姊妹豆漿</a></br>地址：700 台南市中西區民族路三段普濟街巷子口<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-ash2/v/t1.0-9/1044625_436046696502144_1338469741_n.jpg?oh=6c2ed341918c980aa734f059b03b461d&oe=57430281 style=width:228px;height:304px;border-radius:10px;>").addTo(overnight);
+	
+var overfood2 = L.icon({
+    iconUrl: 'https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpf1/t31.0-8/12615146_1055912604429654_2306375039310904413_o.jpg',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([22.99551, 120.21708], {icon: overfood2}).bindPopup("<b>店名：<a href=https://www.facebook.com/pages/%E6%AD%A1%E5%96%9C%E9%B9%B9%E9%85%A5%E9%9B%9E/132270963536417?__mref=message_bubble>歡喜鹽酥雞</a></br>地址：台南市東區育樂街裡面</br>訂購專線：06-2757778, 0982207262<img src=https://scontent-tpe1-1.xx.fbcdn.net/hphotos-xpf1/t31.0-8/12615146_1055912604429654_2306375039310904413_o.jpg style=width:304px;height:228px;border-radius:50%;>").addTo(overnight);
+
+	
+	
+//others
+var others = new L.LayerGroup();
+var otherfood1 = L.icon({
+    iconUrl: 'http://www.shaoshaoke.com/image/logo.jpg',
+    iconSize:     [80, 60], // size of the icon
+});
+L.marker([25.038870,121.528843], {icon: otherfood1}).bindPopup("<b>店名：<a href=http://www.shaoshaoke.com/>勺勺客陝西料理</a></br>地址：台北市中正區仁愛路二段41巷15號<img src=http://www.shaoshaoke.com/image/logo.jpg style=width:304px;height:228px;border-radius:10px;>").addTo(others);
+		
+	
+	var mbAttr = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'bettle123.o2niii11'
-		}).addTo(map);
-var marker = L.marker([lat, lon]).addTo(map);
-var circle = L.circle([lat, lon], 600, {
-    color: 'green',
-    fillColor: 'purple',
-    fillOpacity: 0.3
-}).addTo(map);
-var circle = L.circle([lat, lon], 650, {
-    color: 'green',
-    fillColor: 'purple',
-    fillOpacity: 0.3
-}).addTo(map);
-var polygon = L.polygon([
-    [lat, lon+0.0057735],
-    [lat-0.005, lon-0.00288675],
-    [lat+0.005, lon-0.00288675]
-]).addTo(map);
-var polygon = L.polygon([
-    [lat, lon-0.0057735],
-    [lat+0.005, lon+0.00288675],
-    [lat-0.005, lon+0.00288675]
-]).addTo(map);
+			mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiYmV0dGxlMTIzIiwiYSI6ImNpZ2pleWwxdzAwMzN1MWtyN2oyODJqOTYifQ.nBVqe8jEx3cj9A3zEQfFKw';
 
+	    var comic   = L.tileLayer(mbUrl, {id: 'mapbox.comic', attribution: mbAttr}),
+		    streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+
+		var map = L.map('map', {
+			center: [22.995946, 120.220928],
+			zoom: 8,
+			layers: [streets, bread,breakfast,meal,overnight,others]
+		});
+ 
+
+	
+	
+		var baseLayers = {
+			"街景版": streets,
+			"漫畫版": comic
+		};
+        var overlays = {
+			"麵包&蛋糕店": bread,
+			"早餐店":breakfast,
+			"正餐":meal,
+			"宵夜":overnight,
+			"其他":others
+		};
+L.control.layers(baseLayers, overlays).addTo(map);
+
+
+	
 var popup = L.popup();
-
 function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
@@ -110,7 +272,58 @@ function onMapClick(e) {
 }
 
 map.on('click', onMapClick);
+	
+$("#allbus").click(function() {
+            map.addLayer(bread)
+			map.addLayer(breakfast)
+			map.addLayer(overnight)
+			map.addLayer(others)
+			map.addLayer(meal)
+});
+$("#bread").click(function() {
+                   map.addLayer(bread)
+				   map.removeLayer(breakfast)
+				   map.removeLayer(overnight)
+				   map.removeLayer(others)
+				   map.removeLayer(meal)
+        });		
+$("#breakfast").click(function() {
+            map.addLayer(breakfast)
+			map.removeLayer(bread)
+			map.removeLayer(overnight)
+			map.removeLayer(others)
+			map.removeLayer(meal)
+        });	
+$("#meal").click(function() {
+            map.addLayer(meal)
+			map.removeLayer(bread)
+			map.removeLayer(breakfast)
+			map.removeLayer(overnight)
+			map.removeLayer(others)
+        });	
+$("#overnight").click(function() {
+            map.addLayer(overnight)
+			map.removeLayer(bread)
+			map.removeLayer(breakfast)
+			map.removeLayer(others)
+			map.removeLayer(meal)
+        });		
+$("#others").click(function() {
+	        map.addLayer(others)
+            map.removeLayer(bread)
+			map.removeLayer(breakfast)
+			map.removeLayer(overnight)
+			map.removeLayer(meal)
+        });
+	
+	
 </script>
+		<button onclick="callhello2()" style="width:80%;height:80px; background-color:lightgreen;border-radius:10px">
+			<font size="5">如果您發現身邊的美食沒有在上面，也願意和大家分享的話，請您在下方輸入它的名字並按下此按鈕，我們會盡快讓它出現在美食大富翁上面的XD</font></button>
+	<input  style="width:80%;height:60px;font-size:35px;border-radius:10px;" type="text" id="item"></p>
+<p id="demo">
+<p><span style="color:white;background-color:black;">Thanks for your participation.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from Cheng Kung University team 15</p>
 </body>
 
 </html>
+
